@@ -1,0 +1,9 @@
+#compdef task
+
+_arguments '1: :->tasks' '*: :_files'
+case "$state" in
+    tasks)
+        args=$(task --list | grep '*' |  sed 's/* //' | awk '{print $1}' | sed 's/.$//'| xargs)
+        _arguments "1:profiles:($args)"
+	;;
+esac
